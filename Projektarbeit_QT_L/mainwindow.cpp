@@ -27,8 +27,10 @@ void MainWindow::on_pushButton_clicked()
   rapidcsv::Document doc(path,rapidcsv::LabelParams(0,0));
   int rows= doc.GetRowCount();
   int cols= doc.GetColumnCount();
+  /**
   float ** matrix=aufbau_matrix(rows,cols);
   csv_einlesen(path,matrix);
   print_array_2D(matrix,rows,cols);
   abbau_matrix(matrix,rows);
+  */
 }

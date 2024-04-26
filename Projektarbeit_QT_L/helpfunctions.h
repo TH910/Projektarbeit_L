@@ -1,0 +1,4 @@
+#ifndef HELPFUNCTIONS_H
+#define HELPFUNCTIONS_H
+
+#endif // HELPFUNCTIONS_H

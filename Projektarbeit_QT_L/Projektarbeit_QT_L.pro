@@ -25,10 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    helpfunctions.cpp \
+    helpfunctions_c.c
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    helpfunctions.h \
+    helpfunctions_c.h \
+    rapidcsv.h
 
 FORMS += \
         mainwindow.ui

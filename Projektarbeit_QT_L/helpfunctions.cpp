@@ -18,23 +18,31 @@ void print_array_2D(float ** output,int rows,int cols)
     }
 }
 
-void csv_einlesen(const char* path,float **matrix)
+std::vector<messpunkt> csv_einlesen(const char* path)
 {
+  std::vector<messpunkt> mpl;
   QFile CSVFile(path);
   if(CSVFile.open(QIODevice::ReadWrite)){
       QTextStream Stream(&CSVFile);
       int RowNumber =0;
+      float x=0,y=0,z=0;
       while(Stream.atEnd()== false){
           QString LineData= Stream.readLine();
           QStringList Data= LineData.split(",");
           RowNumber=RowNumber+1;
           for(int i=1;i<Data.length();i++){
               if(RowNumber !=1){
-                matrix[RowNumber-2][i-1]=Data.at(i).toFloat();
+                  if(i==1)x=Data.at(i).toFloat();
+                  if(i==2)y=Data.at(i).toFloat();
+                  if(i==3)z=Data.at(i).toFloat();
                 //qDebug()<<"Row"<<RowNumber<<" : Column "<<i<< "Data is : " << Data.at(i).toFloat();
                 }
             }
+          if(RowNumber !=1){
+          mpl.push_back(messpunkt(x,y,z,0,0,0));
+          }
         }
     }
   CSVFile.close();
+  return mpl;
 }

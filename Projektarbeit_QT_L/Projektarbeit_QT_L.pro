@@ -27,13 +27,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     helpfunctions.cpp \
-    helpfunctions_c.c
+    helpfunctions_c.c \
+    messpunkt.cpp
 
 HEADERS += \
         mainwindow.h \
     helpfunctions.h \
     helpfunctions_c.h \
-    rapidcsv.h
+    rapidcsv.h \
+    messpunkt.h
 
 FORMS += \
         mainwindow.ui

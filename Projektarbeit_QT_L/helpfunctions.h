@@ -3,9 +3,10 @@
 
 #include <vector>
 #include "helpfunctions_c.h"
+#include "messpunkt.h"
 
 void print_array_2D(float ** output,int rows,int cols);
-void csv_einlesen(const char* path,float **matrix);
+std::vector<messpunkt>csv_einlesen(const char* path);
 
 
 #endif // HELPFUNCTIONS_H

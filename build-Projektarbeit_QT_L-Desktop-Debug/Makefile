@@ -53,11 +53,13 @@ OBJECTS_DIR   = ./
 SOURCES       = ../Projektarbeit_QT_L/main.cpp \
 		../Projektarbeit_QT_L/mainwindow.cpp \
 		../Projektarbeit_QT_L/helpfunctions.cpp \
-		../Projektarbeit_QT_L/helpfunctions_c.c moc_mainwindow.cpp
+		../Projektarbeit_QT_L/helpfunctions_c.c \
+		../Projektarbeit_QT_L/messpunkt.cpp moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		helpfunctions.o \
 		helpfunctions_c.o \
+		messpunkt.o \
 		moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -127,6 +129,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		../Projektarbeit_QT_L/.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -149,10 +152,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../Projektarbeit_QT_L/Projektarbeit_QT_L.pro ../Projektarbeit_QT_L/mainwindow.h \
 		../Projektarbeit_QT_L/helpfunctions.h \
 		../Projektarbeit_QT_L/helpfunctions_c.h \
-		../Projektarbeit_QT_L/rapidcsv.h ../Projektarbeit_QT_L/main.cpp \
+		../Projektarbeit_QT_L/rapidcsv.h \
+		../Projektarbeit_QT_L/messpunkt.h ../Projektarbeit_QT_L/main.cpp \
 		../Projektarbeit_QT_L/mainwindow.cpp \
 		../Projektarbeit_QT_L/helpfunctions.cpp \
-		../Projektarbeit_QT_L/helpfunctions_c.c
+		../Projektarbeit_QT_L/helpfunctions_c.c \
+		../Projektarbeit_QT_L/messpunkt.cpp
 QMAKE_TARGET  = Projektarbeit_QT_L
 DESTDIR       = 
 TARGET        = Projektarbeit_QT_L
@@ -232,6 +237,7 @@ Makefile: ../Projektarbeit_QT_L/Projektarbeit_QT_L.pro /usr/lib/x86_64-linux-gnu
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -324,6 +330,7 @@ Makefile: ../Projektarbeit_QT_L/Projektarbeit_QT_L.pro /usr/lib/x86_64-linux-gnu
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -362,8 +369,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Projektarbeit_QT_L/mainwindow.h ../Projektarbeit_QT_L/helpfunctions.h ../Projektarbeit_QT_L/helpfunctions_c.h ../Projektarbeit_QT_L/rapidcsv.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Projektarbeit_QT_L/main.cpp ../Projektarbeit_QT_L/mainwindow.cpp ../Projektarbeit_QT_L/helpfunctions.cpp ../Projektarbeit_QT_L/helpfunctions_c.c $(DISTDIR)/
+	$(COPY_FILE) --parents ../Projektarbeit_QT_L/mainwindow.h ../Projektarbeit_QT_L/helpfunctions.h ../Projektarbeit_QT_L/helpfunctions_c.h ../Projektarbeit_QT_L/rapidcsv.h ../Projektarbeit_QT_L/messpunkt.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Projektarbeit_QT_L/main.cpp ../Projektarbeit_QT_L/mainwindow.cpp ../Projektarbeit_QT_L/helpfunctions.cpp ../Projektarbeit_QT_L/helpfunctions_c.c ../Projektarbeit_QT_L/messpunkt.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Projektarbeit_QT_L/mainwindow.ui $(DISTDIR)/
 
 
@@ -429,17 +436,21 @@ main.o: ../Projektarbeit_QT_L/main.cpp ../Projektarbeit_QT_L/mainwindow.h
 mainwindow.o: ../Projektarbeit_QT_L/mainwindow.cpp ../Projektarbeit_QT_L/mainwindow.h \
 		ui_mainwindow.h \
 		../Projektarbeit_QT_L/helpfunctions.h \
+		../Projektarbeit_QT_L/helpfunctions_c.h \
 		../Projektarbeit_QT_L/rapidcsv.h \
-		../Projektarbeit_QT_L/helpfunctions_c.h
+		../Projektarbeit_QT_L/messpunkt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Projektarbeit_QT_L/mainwindow.cpp
 
 helpfunctions.o: ../Projektarbeit_QT_L/helpfunctions.cpp ../Projektarbeit_QT_L/helpfunctions.h \
-		../Projektarbeit_QT_L/rapidcsv.h \
-		../Projektarbeit_QT_L/helpfunctions_c.h
+		../Projektarbeit_QT_L/helpfunctions_c.h \
+		../Projektarbeit_QT_L/rapidcsv.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o helpfunctions.o ../Projektarbeit_QT_L/helpfunctions.cpp
 
 helpfunctions_c.o: ../Projektarbeit_QT_L/helpfunctions_c.c 
 	$(CC) -c $(CFLAGS) $(INCPATH) -o helpfunctions_c.o ../Projektarbeit_QT_L/helpfunctions_c.c
+
+messpunkt.o: ../Projektarbeit_QT_L/messpunkt.cpp ../Projektarbeit_QT_L/messpunkt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o messpunkt.o ../Projektarbeit_QT_L/messpunkt.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

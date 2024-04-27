@@ -46,3 +46,105 @@ std::vector<messpunkt> csv_einlesen(const char* path)
   CSVFile.close();
   return mpl;
 }
+
+void extract_values2(float *mp,char *stream){
+  char extract_stream[250];
+  char start[]= "6dmt2";
+  char end[]= "6dmtr";
+
+  QString myvalue;
+  char *ptrStart=strstr(stream,start);
+  char *ptrEnd=strstr(stream,end);
+  *ptrEnd='\0';
+  strcpy(extract_stream,ptrStart);
+  //printf("%s",extract_stream);
+  char *pch;
+  pch=strtok(extract_stream," []");
+  int  num=0;
+  int printon=0;
+  float buf=0;
+  while(pch!=NULL){
+
+      switch(num) {
+          case 7:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of sy %f\n", buf);
+              mp[0]=buf;
+              break;
+          case 8:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of sy %f\n",buf);
+              mp[1]=buf;
+              break;
+          case 9:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of sz %f\n",buf);
+              mp[2]=buf;
+              break;
+          case 10:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of b0 %f\n",buf);
+              mp[3]=buf;
+              break;
+          case 11:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of b1 %f\n",buf);
+              mp[4]=buf;
+              break;
+          case 12:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of b2 %f\n",buf);
+              mp[5]=buf;
+              break;
+          case 13:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of b3 %f\n",buf);
+              mp[6]=buf;
+              break;
+          case 14:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of b4 %f\n",buf);
+              mp[7]=buf;
+              break;
+          case 15:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of b5 %f\n",buf);
+              mp[8]=buf;
+              break;
+          case 16:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of b6 %f\n",buf);
+              mp[9]=buf;
+              break;
+          case 17:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of b7 %f\n",buf);
+              mp[10]=buf;
+              break;
+          case 18:
+              myvalue=pch;
+              buf=myvalue.toFloat();
+              if(printon==1)printf("Float value of b8 %f\n",buf);
+              mp[11]=buf;
+              break;
+
+          default:
+              break;
+      }
+      //printf("%s in Aufruf %d\n",pch,num);
+      pch=strtok(NULL," []");
+      num++;
+  }
+}
+

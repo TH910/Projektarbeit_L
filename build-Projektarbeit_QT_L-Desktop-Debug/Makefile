@@ -437,12 +437,13 @@ mainwindow.o: ../Projektarbeit_QT_L/mainwindow.cpp ../Projektarbeit_QT_L/mainwin
 		ui_mainwindow.h \
 		../Projektarbeit_QT_L/helpfunctions.h \
 		../Projektarbeit_QT_L/helpfunctions_c.h \
-		../Projektarbeit_QT_L/rapidcsv.h \
-		../Projektarbeit_QT_L/messpunkt.h
+		../Projektarbeit_QT_L/messpunkt.h \
+		../Projektarbeit_QT_L/rapidcsv.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Projektarbeit_QT_L/mainwindow.cpp
 
 helpfunctions.o: ../Projektarbeit_QT_L/helpfunctions.cpp ../Projektarbeit_QT_L/helpfunctions.h \
 		../Projektarbeit_QT_L/helpfunctions_c.h \
+		../Projektarbeit_QT_L/messpunkt.h \
 		../Projektarbeit_QT_L/rapidcsv.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o helpfunctions.o ../Projektarbeit_QT_L/helpfunctions.cpp
 

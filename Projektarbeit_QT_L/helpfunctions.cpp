@@ -39,13 +39,58 @@ std::vector<messpunkt> csv_einlesen(const char* path)
                 }
             }
           if(RowNumber !=1){
-          mpl.push_back(messpunkt(x,y,z,0,0,0));
+          mpl.push_back(messpunkt(x,y,z));
           }
         }
     }
   CSVFile.close();
   return mpl;
 }
+
+
+void udp_server(){
+  int sockfd;
+  char buffer[MAXLINE];
+  struct sockaddr_in servaddr, cliaddr;
+
+  // Creating socket file descriptor
+  if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+      perror("socket creation failed");
+      exit(EXIT_FAILURE);
+  }
+
+  memset(&servaddr, 0, sizeof(servaddr));
+  memset(&cliaddr, 0, sizeof(cliaddr));
+
+  // Filling server information
+  servaddr.sin_family    = AF_INET; // IPv4
+  servaddr.sin_addr.s_addr = INADDR_ANY;
+  servaddr.sin_port = htons(PORT);
+
+  // Bind the socket with the server address
+  if ( bind(sockfd, (const struct sockaddr *)&servaddr,
+          sizeof(servaddr)) < 0 )
+  {
+      perror("bind failed");
+      exit(EXIT_FAILURE);
+  }
+
+  socklen_t len;
+  int n;
+  float mp[12]={0};
+  len = sizeof(cliaddr);  //len is value/result
+  while(1){
+  n = recvfrom(sockfd, (char *)buffer, MAXLINE,
+              MSG_WAITALL, ( struct sockaddr *) &cliaddr,
+              &len);
+  buffer[n] = '\0';
+  extract_values2(mp,buffer);
+  //qDebug()<<buffer;
+  //printf("%s\n", buffer);
+   }
+
+}
+
 
 void extract_values2(float *mp,char *stream){
   char extract_stream[250];
@@ -61,7 +106,7 @@ void extract_values2(float *mp,char *stream){
   char *pch;
   pch=strtok(extract_stream," []");
   int  num=0;
-  int printon=0;
+  int printon=1;
   float buf=0;
   while(pch!=NULL){
 
@@ -147,4 +192,6 @@ void extract_values2(float *mp,char *stream){
       num++;
   }
 }
+
+
 

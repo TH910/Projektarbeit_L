@@ -32,6 +32,8 @@ public:
     QPushButton *pushButton;
     QLineEdit *lineEdit;
     QLabel *label;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -52,6 +54,12 @@ public:
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(180, 10, 401, 17));
+        pushButton_2 = new QPushButton(centralWidget);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(20, 140, 121, 31));
+        pushButton_3 = new QPushButton(centralWidget);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        pushButton_3->setGeometry(QRect(20, 190, 181, 31));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -75,6 +83,8 @@ public:
         pushButton->setText(QApplication::translate("MainWindow", ".csv einlesen", Q_NULLPTR));
         lineEdit->setText(QApplication::translate("MainWindow", "/home/timohin/Documents/Messpunkte_csv.csv", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Pfad: /home/timohin/Documents/Messpunkte_csv.csv", Q_NULLPTR));
+        pushButton_2->setText(QApplication::translate("MainWindow", "UDP start", Q_NULLPTR));
+        pushButton_3->setText(QApplication::translate("MainWindow", "UDP Stream einlesen", Q_NULLPTR));
     } // retranslateUi
 
 };

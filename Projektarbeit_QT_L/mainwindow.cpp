@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QtGui>
 #include "helpfunctions.h"
-#include "helpfunctions_c.h"
+
 #include "rapidcsv.h"
 #include "messpunkt.h"
 #include <vector>
@@ -28,7 +28,7 @@ void MainWindow::on_pushButton_clicked()
   QString s=ui->lineEdit->text();
   QByteArray ba = s.toLatin1();
   const char *path= ba.data();
-  //const char *path= "/home/timohin/Documents/Messpunkte_csv.csv";
+  //const char *path="/home/timohin/Documents/Messpunkte_csv2.csv" ;
   std::vector<messpunkt> mpl=csv_einlesen(path);
   for(size_t i=0; i<mpl.size(); ++i){
    mpl[i].anzeigen();
@@ -37,7 +37,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-  udp_server();
+
 }
 
 void MainWindow::on_pushButton_3_clicked()

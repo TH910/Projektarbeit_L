@@ -18,41 +18,30 @@ void print_array_2D(float ** output,int rows,int cols)
     }
 }
 
-std::vector<messpunkt> csv_einlesen(const char* path)
+
+std::vector<messpunkt> csv_einlesen(const char *path)
 {
+
+  rapidcsv::Document doc(path,rapidcsv::LabelParams(0,0));
   std::vector<messpunkt> mpl;
-  QFile CSVFile(path);
-  if(CSVFile.open(QIODevice::ReadWrite)){
-      QTextStream Stream(&CSVFile);
-      int RowNumber =0;
-      float x=0,y=0,z=0;
-      while(Stream.atEnd()== false){
-          QString LineData= Stream.readLine();
-          QStringList Data= LineData.split(",");
-          RowNumber=RowNumber+1;
-          for(int i=1;i<Data.length();i++){
-              if(RowNumber !=1){
-                  if(i==1)x=Data.at(i).toFloat();
-                  if(i==2)y=Data.at(i).toFloat();
-                  if(i==3)z=Data.at(i).toFloat();
-                //qDebug()<<"Row"<<RowNumber<<" : Column "<<i<< "Data is : " << Data.at(i).toFloat();
-                }
-            }
-          if(RowNumber !=1){
-          mpl.push_back(messpunkt(x,y,z));
-          }
-        }
-    }
-  CSVFile.close();
+  std::vector<float> row;
+  for(unsigned int i=0; i<doc.GetRowCount();i++){
+    row=doc.GetRow<float>(i);
+    //qDebug()<<row[0]<<" : "<<row[1]<<" : "<<row[2]<< "\n";
+    mpl.push_back(messpunkt(row[0],row[1],row[2]));
+}
   return mpl;
 }
 
+
+#define PORT     5000
+#define MAXLINE 1024
 
 void udp_server(){
   int sockfd;
   char buffer[MAXLINE];
   struct sockaddr_in servaddr, cliaddr;
-
+  char ip[]="127.0.0.1";
   // Creating socket file descriptor
   if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
       perror("socket creation failed");
@@ -64,7 +53,7 @@ void udp_server(){
 
   // Filling server information
   servaddr.sin_family    = AF_INET; // IPv4
-  servaddr.sin_addr.s_addr = INADDR_ANY;
+  servaddr.sin_addr.s_addr = inet_addr(ip);
   servaddr.sin_port = htons(PORT);
 
   // Bind the socket with the server address
@@ -192,6 +181,8 @@ void extract_values2(float *mp,char *stream){
       num++;
   }
 }
+
+
 
 
 

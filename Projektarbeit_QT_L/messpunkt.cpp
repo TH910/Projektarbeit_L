@@ -114,7 +114,6 @@ void messpunkt::anzeigen(){
 
   //std::cout <<transx<<" : " <<transy<<" : "<<transz<<"\n";
   //std::cout <<rotx<<" : " <<roty<<" : "<<rotz<<"\n";
-  qDebug() <<sx<<" : " <<sy<<" : "<<sz<<"\n";
-  qDebug() <<b0<<" : " <<b1<<" : "<<b3<<" : "<<b4<<" : " <<b5<<" : " <<b6<<" : "<<b7<<" : " <<b8<<"\n";
+  qDebug() <<sx<<" : " <<sy<<" : "<<sz<<" : "<<b0<< " : "<<b1<<" : "<<b3<<" : "<<b4<<" : " <<b5<<" : " <<b6<<" : "<<b7<<" : " <<b8<<"\n";
 
 }
